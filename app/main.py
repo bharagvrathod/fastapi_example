@@ -18,29 +18,29 @@ import requests as _requests
 import bs4 as _bs4
 import strawberry
 import uvicorn
-#
-# mydb = mysql.connector.connect(
-#   host="localhost",
-#   user="root",
-#   password="Bh@f1mercedes",
-#   database="school_management"
-# )
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="Bh@f1mercedes",
+  database="school_management"
+)
 
 
-# mycursor = mydb.cursor(dictionary=True)
+mycursor = mydb.cursor(dictionary=True)
 models.Base.metadata.create_all(bind=engine)
 
-# middleware = [
-#     Middleware(
-#         CORSMiddleware,
-#         allow_origins=['*'],
-#         allow_credentials=True,
-#         allow_methods=['*'],
-#         allow_headers=['*']
-#     )
-# ]
+middleware = [
+    Middleware(
+        CORSMiddleware,
+        allow_origins=['*'],
+        allow_credentials=True,
+        allow_methods=['*'],
+        allow_headers=['*']
+    )
+]
 
-app = FastAPI()
+app = FastAPI(middleware=middleware)
 
 # origins = [
 #     "https://www.google.com/"
@@ -112,55 +112,55 @@ def root():
 #     pass
 
 
-# @app.get("/marks")
-# def get_marks():
-#     sql_products = mycursor.execute("SELECT * FROM school_management.student_marks;")
-#     sql_products = mycursor.fetchall()
-#     return {"data": sql_products}
-#
-#
-#
-# @app.post("/marks")
-# def create_post(grades: schemas.StudentMarks):
-#     mycursor.execute("""INSERT INTO school_management.student_marks (school_id, year_id, student_id, marks, grade, subject_id, exam_id) """
-#                          """VALUES (%s, %s, %s, %s, %s, %s, %s)""", (grades.school_id, grades.year_id, grades.student_id, grades.marks, grades.grade, grades.subject_id, grades.exam_id))
-#     new_post = mycursor.fetchall()
-#     mydb.commit()
-#     mydb.close()
-#     return {"message": new_post}
-#
-#
-# @app.get("/marks/{id}")
-# def get_marks_id(id: int):
-#     mycursor.execute(
-#         """SELECT * FROM school_management.student_marks WHERE marks_id = %s """, [(id)])
-#     test_marks = mycursor.fetchone()
-#     return {"data": test_marks}
-#     pass
-#
-#
-# @app.delete("/marks/{id}")
-# def delete_marks(id:int):
-#     mycursor.execute(
-#         """DELETE FROM school_management.student_marks WHERE marks_id = %s""", [(id)])
-#     deleted_post = mycursor.fetchone()
-#     mydb.commit()
-#     mydb.close()
-#     pass
-#
-#
-# @app.put("/marks/{id}")
-# def update_marks_id(id: int, grades: schemas.StudentMarks):
-#     mycursor.execute(
-#         """UPDATE school_management.student_marks SET school_id = %s, year_id = %s, student_id = %s, marks = %s, grade = %s, subject_id = %s, exam_id = %s WHERE marks_id = %s """, (
-#         grades.school_id, grades.year_id, grades.student_id, grades.marks, grades.grade, grades.subject_id,
-#         grades.exam_id, str(id)))
-#
-#     updated_marks = mycursor.fetchone()
-#     mydb.commit()
-#     mydb.close()
-#     return {"data": updated_marks}
-#     pass
+@app.get("/marks")
+def get_marks():
+    sql_products = mycursor.execute("SELECT * FROM school_management.student_marks;")
+    sql_products = mycursor.fetchall()
+    return {"data": sql_products}
+
+
+
+@app.post("/marks")
+def create_post(grades: schemas.StudentMarks):
+    mycursor.execute("""INSERT INTO school_management.student_marks (school_id, year_id, student_id, marks, grade, subject_id, exam_id) """
+                         """VALUES (%s, %s, %s, %s, %s, %s, %s)""", (grades.school_id, grades.year_id, grades.student_id, grades.marks, grades.grade, grades.subject_id, grades.exam_id))
+    new_post = mycursor.fetchall()
+    mydb.commit()
+    mydb.close()
+    return {"message": new_post}
+
+
+@app.get("/marks/{id}")
+def get_marks_id(id: int):
+    mycursor.execute(
+        """SELECT * FROM school_management.student_marks WHERE marks_id = %s """, [(id)])
+    test_marks = mycursor.fetchone()
+    return {"data": test_marks}
+    pass
+
+
+@app.delete("/marks/{id}")
+def delete_marks(id:int):
+    mycursor.execute(
+        """DELETE FROM school_management.student_marks WHERE marks_id = %s""", [(id)])
+    deleted_post = mycursor.fetchone()
+    mydb.commit()
+    mydb.close()
+    pass
+
+
+@app.put("/marks/{id}")
+def update_marks_id(id: int, grades: schemas.StudentMarks):
+    mycursor.execute(
+        """UPDATE school_management.student_marks SET school_id = %s, year_id = %s, student_id = %s, marks = %s, grade = %s, subject_id = %s, exam_id = %s WHERE marks_id = %s """, (
+        grades.school_id, grades.year_id, grades.student_id, grades.marks, grades.grade, grades.subject_id,
+        grades.exam_id, str(id)))
+
+    updated_marks = mycursor.fetchone()
+    mydb.commit()
+    mydb.close()
+    return {"data": updated_marks}
+    pass
 
 
 

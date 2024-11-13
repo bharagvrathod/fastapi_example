@@ -11,7 +11,7 @@ from sqlalchemy.orm import declarative_base
 url_object = URL.create(
     "mysql+pymysql",
     username="root",
-    password="pbt@2430",  # plain (unescaped) text
+    password="Bh@f1mercedes",  # plain (unescaped) text
     host="localhost",
     database="school_management",
 )
