@@ -18,13 +18,13 @@ import requests as _requests
 import bs4 as _bs4
 import strawberry
 import uvicorn
-
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="Bh@f1mercedes",
-  database="school_management"
-)
+#
+# mydb = mysql.connector.connect(
+#   host="localhost",
+#   user="root",
+#   password="Bh@f1mercedes",
+#   database="school_management"
+# )
 
 
 mycursor = mydb.cursor(dictionary=True)
