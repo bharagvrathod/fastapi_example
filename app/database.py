@@ -11,9 +11,10 @@ from sqlalchemy.orm import declarative_base
 url_object = URL.create(
     "mysql+pymysql",
     username="root",
-    password="Bh@f1mercedes",  # plain (unescaped) text
-    host="localhost",
-    database="school_management",
+    password="yUStwVNtzhhIUyLdybdSxBUycmhlGrbU",  # plain (unescaped) text
+    host="mysql.railway.internal",
+    database="railway",
+    port="3306"
 )
 
 engine = create_engine(url_object)
